@@ -15,6 +15,15 @@ class CreateMediaTable extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->id();
+            $table->enum('type', ['IMAGE', 'VIDEO', 'FILE']);
+            $table->string('name',100);
+            $table->string('location');
+            $table->string('url');
+            $table->string('caption');
+            $table->foreignId('author')->constrained('users');
+            $table->unsignedTinyInteger('status');
+            $table->foreignId('created_by')->constrained('users');
+            $table->foreignId('modified_by')->constrained('users');
             $table->timestamps();
         });
     }
